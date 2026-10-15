@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#08141f">
+  <meta name="theme-color" content="#080d18">
   <meta name="description" content="Take a break with a live selection of popular meme templates and a surprise video." />
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://memebreak.pages.dev/">
@@ -24,16 +24,17 @@
   <meta name="twitter:image" content="https://memebreak.pages.dev/social-preview.png">
   <title>MemeBreak | Popular Memes</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=DM+Sans:wght@400;500;600;700;800&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap");
 
     :root {
       color-scheme: dark;
-      --ink: #e6f6ff;
-      --muted: #9bb7c5;
-      --teal: #62e3d4;
-      --sky: #84cfff;
-      --line: rgb(143 207 225 / 18%);
-      --glass: rgb(17 39 55 / 58%);
+      --ink: #f1f5fc;
+      --muted: #a5b4c7;
+      --teal: #78ead6;
+      --sky: #8abaff;
+      --violet: #b5a1ff;
+      --line: rgb(180 211 255 / 20%);
+      --glass: rgb(17 29 47 / 64%);
     }
 
     * {
@@ -41,18 +42,54 @@
     }
 
     body {
+      position: relative;
+      isolation: isolate;
       min-height: 100%;
       margin: 0;
       color: var(--ink);
-      background-color: #08141f;
+      background-color: #080d18;
       background-image:
-        linear-gradient(132deg, #07131d 0%, #10283a 54%, #101b2b 100%),
-        linear-gradient(rgb(132 207 225 / 6%) 1px, transparent 1px),
-        linear-gradient(90deg, rgb(132 207 225 / 6%) 1px, transparent 1px);
-      background-size: cover, 44px 44px, 44px 44px;
+        radial-gradient(ellipse at 16% 16%, rgb(71 183 197 / 17%), transparent 38%),
+        radial-gradient(ellipse at 84% 18%, rgb(114 94 198 / 17%), transparent 36%),
+        linear-gradient(145deg, #080d18 0%, #0c1523 52%, #101427 100%),
+        linear-gradient(rgb(173 205 255 / 5%) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(173 205 255 / 5%) 1px, transparent 1px);
+      background-size: cover, cover, cover, 56px 56px, 56px 56px;
       background-position: 0 0, 0 0, 0 0;
       font-family: "DM Sans", "Trebuchet MS", sans-serif;
       animation: background-drift 34s ease-in-out infinite alternate;
+    }
+
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: -1;
+      border: 1px solid rgb(190 224 255 / 18%);
+      content: "";
+      pointer-events: none;
+      backdrop-filter: blur(2px);
+    }
+
+    body::before {
+      top: 17%;
+      left: -54px;
+      width: 190px;
+      height: 190px;
+      border-radius: 42% 58% 56% 44% / 45% 42% 58% 55%;
+      background: linear-gradient(145deg, rgb(166 226 255 / 12%), rgb(113 101 187 / 4%));
+      box-shadow: inset 12px 12px 32px rgb(206 237 255 / 10%), 0 20px 60px rgb(0 0 0 / 18%), 0 0 46px rgb(76 190 205 / 6%);
+      animation: orb-drift 13s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      right: -48px;
+      bottom: 10%;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 27%, rgb(217 244 255 / 50%), rgb(111 139 218 / 28%) 56%, rgb(105 82 175 / 10%));
+      box-shadow: inset -12px -16px 36px rgb(180 205 255 / 9%), 0 24px 70px rgb(0 0 0 / 24%);
+      animation: orb-drift 16s 1s ease-in-out infinite alternate-reverse;
     }
 
     button {
@@ -63,13 +100,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
       max-width: 1180px;
       margin: 0 auto;
-      padding: 22px 28px;
-      border-bottom: 1px solid var(--line);
-      background: rgb(9 25 37 / 62%);
-      box-shadow: 0 1px 0 rgb(111 223 232 / 8%);
-      backdrop-filter: blur(20px) saturate(150%);
+      padding: 16px 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(120deg, rgb(25 42 63 / 70%), rgb(13 23 39 / 64%));
+      box-shadow: 0 12px 36px rgb(0 0 0 / 25%), inset 0 1px 0 rgb(226 240 255 / 12%);
+      backdrop-filter: blur(24px) saturate(145%);
       animation: bar-enter 600ms ease-out both;
     }
 
@@ -78,8 +117,9 @@
       align-items: center;
       gap: 9px;
       color: var(--ink);
-      font-family: "Bowlby One SC", Impact, sans-serif;
-      font-size: 22px;
+      font-family: "DM Sans", "Trebuchet MS", sans-serif;
+      font-size: 19px;
+      font-weight: 800;
       text-decoration: none;
     }
 
@@ -90,7 +130,7 @@
 
     .brand span {
       color: var(--teal);
-      text-shadow: 0 0 18px rgb(98 227 212 / 24%);
+      text-shadow: 0 0 18px rgb(120 234 214 / 28%);
       animation: logo-glow 4s ease-in-out infinite;
     }
 
@@ -104,20 +144,56 @@
     .page {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 55px 28px 72px;
+      position: relative;
+      isolation: isolate;
+      padding: 70px 28px 72px;
     }
 
     .intro {
+      position: relative;
       display: flex;
       align-items: end;
       justify-content: space-between;
       gap: 24px;
-      margin-bottom: 32px;
+      margin-bottom: 34px;
+    }
+
+    .intro::before,
+    .intro::after {
+      position: absolute;
+      z-index: -1;
+      content: "";
+      pointer-events: none;
+    }
+
+    .intro::before {
+      top: -48px;
+      left: 49%;
+      width: 116px;
+      height: 116px;
+      border: 1px solid rgb(218 238 255 / 23%);
+      border-radius: 34% 66% 48% 52% / 52% 43% 57% 48%;
+      background: linear-gradient(145deg, rgb(185 226 255 / 16%), rgb(139 123 223 / 8%));
+      box-shadow: inset 8px 8px 24px rgb(221 240 255 / 12%), 0 20px 48px rgb(0 0 0 / 20%);
+      backdrop-filter: blur(12px);
+      animation: glass-float 9s ease-in-out infinite;
+    }
+
+    .intro::after {
+      top: -20px;
+      right: 8%;
+      width: 66px;
+      height: 66px;
+      border: 1px solid rgb(222 237 255 / 26%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 27%, #e8ffff, #79b3f7 55%, #8977dc 100%);
+      box-shadow: inset -6px -8px 15px rgb(30 50 112 / 23%), 0 16px 36px rgb(67 105 202 / 22%);
+      animation: orb-drift 7s 800ms ease-in-out infinite alternate;
     }
 
     .eyebrow {
       margin: 0 0 10px;
-      color: #62e3d4;
+      color: var(--teal);
       font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
@@ -125,10 +201,11 @@
 
     h1 {
       margin: 0;
-      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-family: "DM Sans", "Trebuchet MS", sans-serif;
       font-size: clamp(42px, 7vw, 76px);
-      font-weight: 400;
+      font-weight: 700;
       line-height: 0.98;
+      letter-spacing: -0.065em;
     }
 
     .intro-copy {
@@ -145,7 +222,7 @@
 
     h1 {
       animation: heading-enter 800ms 140ms cubic-bezier(0.18, 0.8, 0.25, 1) backwards;
-      text-shadow: 0 0 42px rgb(97 210 219 / 9%);
+      text-shadow: 0 8px 34px rgb(120 180 255 / 18%);
     }
 
     .intro-copy {
@@ -162,19 +239,37 @@
     .meme-card {
       overflow: hidden;
       min-width: 0;
-      border: 1px solid rgb(175 229 246 / 20%);
-      border-radius: 5px;
-      background: rgb(18 43 59 / 54%);
-      box-shadow: 0 18px 38px rgb(0 0 0 / 24%), inset 0 1px 0 rgb(205 242 255 / 8%);
-      backdrop-filter: blur(20px) saturate(145%);
+      position: relative;
+      border: 1px solid rgb(196 222 255 / 22%);
+      border-radius: 18px;
+      background: linear-gradient(150deg, rgb(23 39 60 / 76%), rgb(13 24 41 / 72%));
+      box-shadow: 0 16px 38px rgb(0 0 0 / 30%), inset 0 1px 0 rgb(226 240 255 / 13%);
+      backdrop-filter: blur(22px) saturate(145%);
       animation: tile-enter 650ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
-      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+      transition: transform 420ms cubic-bezier(0.2, 0.75, 0.25, 1), border-color 300ms ease, box-shadow 300ms ease;
+    }
+
+    .meme-card::after {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background: linear-gradient(112deg, transparent 28%, rgb(198 231 255 / 18%) 48%, transparent 68%);
+      content: "";
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-70%);
+      transition: opacity 250ms ease;
     }
 
     .meme-card:hover {
-      transform: translateY(-5px);
-      border-color: rgb(98 227 212 / 50%);
-      box-shadow: 0 24px 44px rgb(0 0 0 / 32%), 0 0 22px rgb(61 198 206 / 10%);
+      transform: translateY(-7px) rotateX(1.5deg) rotateY(-1deg);
+      border-color: rgb(169 227 255 / 55%);
+      box-shadow: 0 26px 48px rgb(0 0 0 / 38%), 0 0 24px rgb(101 206 220 / 14%);
+    }
+
+    .meme-card:hover::after {
+      opacity: 1;
+      animation: card-shine 900ms ease-out both;
     }
 
     .meme-card img {
@@ -182,7 +277,7 @@
       width: 100%;
       aspect-ratio: 4 / 3;
       object-fit: cover;
-      background: #102d40;
+      background: #111b2b;
       transition: transform 500ms cubic-bezier(0.2, 0.75, 0.25, 1), filter 500ms ease;
     }
 
@@ -198,8 +293,8 @@
       gap: 2px 10px;
       min-height: 66px;
       padding: 10px 12px;
-      border-top: 1px solid rgb(172 227 243 / 16%);
-      background: rgb(9 28 42 / 68%);
+      border-top: 1px solid rgb(190 221 255 / 18%);
+      background: rgb(9 17 29 / 78%);
       backdrop-filter: blur(18px) saturate(150%);
     }
 
@@ -209,12 +304,13 @@
       height: 30px;
       grid-row: span 2;
       place-items: center;
-      border: 1px solid rgb(169 235 244 / 24%);
+      border: 1px solid rgb(167 223 255 / 26%);
       border-radius: 50%;
-      color: #83f0e1;
-      background: rgb(48 127 148 / 30%);
+      color: #a6f3e6;
+      background: linear-gradient(145deg, rgb(42 78 102 / 72%), rgb(29 43 75 / 78%));
       font-size: 11px;
       font-weight: 800;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 22%);
     }
 
     .meme-name {
@@ -228,7 +324,7 @@
     }
 
     .meme-label {
-      color: #8db3c2;
+      color: #8498b2;
       font-size: 9px;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -242,19 +338,19 @@
       justify-content: center;
       padding: 24px;
       text-align: center;
-      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-family: "DM Sans", "Trebuchet MS", sans-serif;
       font-size: 28px;
       line-height: 1.15;
     }
 
     .type-meme.aqua {
-      color: #123c49;
-      background: linear-gradient(145deg, #9fe8e0, #b4dff2);
+      color: #f1f5fc;
+      background: linear-gradient(145deg, #163b50, #27345a);
     }
 
     .type-meme.ice {
-      color: #183c58;
-      background: linear-gradient(145deg, #c5d6ff, #a8dcef);
+      color: #f1f5fc;
+      background: linear-gradient(145deg, #293351, #3c315e);
     }
 
     .prompt-backdrop,
@@ -270,8 +366,8 @@
       display: grid;
       place-items: center;
       padding: 20px;
-      background: rgb(2 9 17 / 62%);
-      backdrop-filter: blur(10px) saturate(130%);
+      background: rgb(3 7 14 / 54%);
+      backdrop-filter: blur(12px) saturate(130%);
       animation: backdrop-enter 360ms ease-out both;
     }
 
@@ -281,11 +377,11 @@
       overflow: hidden;
       width: min(100%, 440px);
       padding: 36px;
-      border: 1px solid rgb(161 225 243 / 30%);
-      border-radius: 8px;
-      background: rgb(17 39 56 / 70%);
-      box-shadow: 0 28px 90px rgb(0 0 0 / 54%), inset 0 1px 0 rgb(221 248 255 / 12%);
-      backdrop-filter: blur(28px) saturate(165%);
+      border: 1px solid rgb(206 230 255 / 28%);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgb(29 48 72 / 82%), rgb(13 23 40 / 78%));
+      box-shadow: 0 28px 90px rgb(0 0 0 / 54%), inset 0 1px 0 rgb(226 242 255 / 18%), inset 0 -1px 0 rgb(130 161 201 / 10%);
+      backdrop-filter: blur(34px) saturate(150%);
       text-align: center;
       animation: glass-enter 520ms cubic-bezier(0.18, 0.8, 0.25, 1) both;
     }
@@ -294,7 +390,7 @@
       position: absolute;
       z-index: 0;
       inset: -60% -90%;
-      background: linear-gradient(110deg, transparent 42%, rgb(225 250 255 / 11%) 50%, transparent 58%);
+      background: linear-gradient(110deg, transparent 42%, rgb(211 237 255 / 19%) 50%, transparent 58%);
       content: "";
       pointer-events: none;
       animation: glass-sweep 8s ease-in-out infinite;
@@ -312,17 +408,17 @@
       place-items: center;
       margin: 0 auto 18px;
       border-radius: 50%;
-      color: #efffff;
-      background: linear-gradient(145deg, #20b9ad, #327fc2);
-      box-shadow: 0 0 28px rgb(62 219 210 / 22%);
-      font-family: "Bowlby One SC", Impact, sans-serif;
+      color: #f4fbff;
+      background: linear-gradient(145deg, #6ee8d5, #4ba9d6 58%, #6977d7);
+      box-shadow: 0 8px 24px rgb(84 205 218 / 24%);
+      font-family: "DM Sans", "Trebuchet MS", sans-serif;
       font-size: 25px;
       animation: mark-pulse 3.5s ease-in-out infinite;
     }
 
     .prompt-warning {
       margin-bottom: 9px !important;
-      color: #72e8dc !important;
+      color: var(--teal) !important;
       font-size: 11px !important;
       font-weight: 800;
       text-transform: uppercase;
@@ -332,9 +428,10 @@
 
     .prompt h2 {
       margin: 0 0 9px;
-      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-family: "DM Sans", "Trebuchet MS", sans-serif;
       font-size: 29px;
-      font-weight: 400;
+      font-weight: 700;
+      letter-spacing: -0.04em;
       line-height: 1.1;
     }
 
@@ -355,8 +452,8 @@
     .choice {
       min-height: 48px;
       flex: 1;
-      border: 1px solid rgb(160 226 243 / 24%);
-      border-radius: 4px;
+      border: 1px solid rgb(205 229 255 / 22%);
+      border-radius: 12px;
       cursor: pointer;
       font-size: 14px;
       font-weight: 800;
@@ -371,16 +468,16 @@
     .choice-yes {
       position: relative;
       overflow: hidden;
-      color: #f4ffff;
-      background: linear-gradient(120deg, #118f8b, #246da8);
-      box-shadow: 0 8px 22px rgb(21 159 174 / 26%);
+      color: #07131c;
+      background: linear-gradient(120deg, #78ead6, #8abaff 62%, #b5a1ff);
+      box-shadow: 0 8px 22px rgb(89 200 222 / 22%);
       animation: yes-glow 4s ease-in-out infinite;
     }
 
     .choice-yes::after {
       position: absolute;
       inset: 0;
-      background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 20%) 50%, transparent 70%);
+      background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 48%) 50%, transparent 70%);
       content: "";
       pointer-events: none;
       animation: glass-sweep 6s ease-in-out infinite;
@@ -388,34 +485,34 @@
 
     .choice-no {
       color: var(--ink);
-      background: rgb(121 166 190 / 13%);
+      background: rgb(127 157 195 / 14%);
       backdrop-filter: blur(10px);
     }
 
     .reopen-button {
       margin-top: 22px;
       padding: 10px 14px;
-      border: 1px solid rgb(154 218 235 / 24%);
-      border-radius: 4px;
+      border: 1px solid rgb(205 229 255 / 22%);
+      border-radius: 12px;
       color: var(--ink);
-      background: rgb(25 52 69 / 54%);
+      background: rgb(21 36 56 / 72%);
       cursor: pointer;
       font-size: 13px;
       font-weight: 800;
-      box-shadow: 0 8px 20px rgb(0 0 0 / 22%);
-      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 20px rgb(0 0 0 / 25%), inset 0 1px 0 rgb(226 240 255 / 12%);
+      backdrop-filter: blur(18px);
       transition: transform 180ms ease, background 180ms ease;
       animation: actions-enter 700ms 900ms backwards;
     }
 
     .reopen-button:hover {
       transform: translateY(-2px);
-      background: rgb(34 74 95 / 72%);
+      background: rgb(32 53 79 / 88%);
     }
 
     .scare {
       z-index: 1;
-      background: #000;
+      background: #03060b;
     }
 
     .scare video {
@@ -436,12 +533,12 @@
     }
 
     @keyframes background-drift {
-      to { background-position: 0 0, 44px 44px, -44px 0; }
+      to { background-position: 0 0, 0 0, 0 0, 56px 56px, -56px 0; }
     }
 
     @keyframes logo-glow {
-      0%, 100% { text-shadow: 0 0 12px rgb(98 227 212 / 16%); }
-      50% { text-shadow: 0 0 22px rgb(98 227 212 / 52%); }
+      0%, 100% { text-shadow: 0 0 12px rgb(120 234 214 / 14%); }
+      50% { text-shadow: 0 0 22px rgb(120 234 214 / 48%); }
     }
 
     @keyframes note-enter {
@@ -480,8 +577,8 @@
     }
 
     @keyframes mark-pulse {
-      0%, 100% { box-shadow: 0 0 18px rgb(62 219 210 / 18%); transform: scale(1); }
-      50% { box-shadow: 0 0 30px rgb(62 219 210 / 42%); transform: scale(1.045); }
+      0%, 100% { box-shadow: 0 0 18px rgb(102 202 231 / 18%); transform: scale(1); }
+      50% { box-shadow: 0 0 30px rgb(120 234 214 / 40%); transform: scale(1.045); }
     }
 
     @keyframes actions-enter {
@@ -490,13 +587,29 @@
     }
 
     @keyframes yes-glow {
-      0%, 100% { box-shadow: 0 8px 22px rgb(21 159 174 / 20%); }
-      50% { box-shadow: 0 8px 30px rgb(21 159 174 / 48%); }
+      0%, 100% { box-shadow: 0 8px 22px rgb(89 200 222 / 18%); }
+      50% { box-shadow: 0 8px 30px rgb(116 181 255 / 42%); }
+    }
+
+    @keyframes orb-drift {
+      0% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+      100% { transform: translate3d(18px, -16px, 0) rotate(10deg); }
+    }
+
+    @keyframes glass-float {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+      50% { transform: translate3d(12px, -16px, 0) rotate(5deg); }
+    }
+
+    @keyframes card-shine {
+      from { transform: translateX(-70%); }
+      to { transform: translateX(70%); }
     }
 
     @media (max-width: 720px) {
       .topbar {
-        padding: 17px 20px;
+        margin: 10px 10px 0;
+        padding: 14px 16px;
       }
 
       .top-note {
@@ -505,7 +618,7 @@
       }
 
       .page {
-        padding: 40px 20px 52px;
+        padding: 44px 20px 52px;
       }
 
       .intro {
@@ -531,6 +644,19 @@
 
       .prompt {
         padding: 30px 22px;
+      }
+
+      .intro::before {
+        left: auto;
+        right: 8%;
+        width: 84px;
+        height: 84px;
+      }
+
+      .intro::after {
+        right: 0;
+        width: 48px;
+        height: 48px;
       }
     }
 
