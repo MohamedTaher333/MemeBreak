@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08141f">
+  <meta name="description" content="Take a break with a live selection of popular meme templates and a surprise video." />
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Meme Break">
+  <meta property="og:description" content="A dark, glassy meme break with popular templates and a surprise video.">
+  <meta property="og:type" content="website">
+  <title>Meme Break | Popular Memes</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=DM+Sans:wght@400;500;600;700;800&display=swap");
+
+    :root {
+      color-scheme: dark;
+      --ink: #e6f6ff;
+      --muted: #9bb7c5;
+      --teal: #62e3d4;
+      --sky: #84cfff;
+      --line: rgb(143 207 225 / 18%);
+      --glass: rgb(17 39 55 / 58%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      color: var(--ink);
+      background-color: #08141f;
+      background-image:
+        linear-gradient(132deg, #07131d 0%, #10283a 54%, #101b2b 100%),
+        linear-gradient(rgb(132 207 225 / 6%) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(132 207 225 / 6%) 1px, transparent 1px);
+      background-size: cover, 44px 44px, 44px 44px;
+      background-position: 0 0, 0 0, 0 0;
+      font-family: "DM Sans", "Trebuchet MS", sans-serif;
+      animation: background-drift 34s ease-in-out infinite alternate;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--line);
+      background: rgb(9 25 37 / 62%);
+      box-shadow: 0 1px 0 rgb(111 223 232 / 8%);
+      backdrop-filter: blur(20px) saturate(150%);
+      animation: bar-enter 600ms ease-out both;
+    }
+
+    .brand {
+      color: var(--ink);
+      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-size: 22px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--teal);
+      text-shadow: 0 0 18px rgb(98 227 212 / 24%);
+      animation: logo-glow 4s ease-in-out infinite;
+    }
+
+    .top-note {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      animation: note-enter 650ms 180ms ease-out backwards;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 55px 28px 72px;
+    }
+
+    .intro {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #62e3d4;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 400;
+      line-height: 0.98;
+    }
+
+    .intro-copy {
+      max-width: 280px;
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .intro {
+      animation: intro-enter 700ms 80ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+    }
+
+    h1 {
+      animation: heading-enter 800ms 140ms cubic-bezier(0.18, 0.8, 0.25, 1) backwards;
+      text-shadow: 0 0 42px rgb(97 210 219 / 9%);
+    }
+
+    .intro-copy {
+      animation: note-enter 700ms 300ms ease-out backwards;
+    }
+
+    .meme-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      perspective: 1000px;
+    }
+
+    .meme-card {
+      overflow: hidden;
+      min-width: 0;
+      border: 1px solid rgb(175 229 246 / 20%);
+      border-radius: 5px;
+      background: rgb(18 43 59 / 54%);
+      box-shadow: 0 18px 38px rgb(0 0 0 / 24%), inset 0 1px 0 rgb(205 242 255 / 8%);
+      backdrop-filter: blur(20px) saturate(145%);
+      animation: tile-enter 650ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .meme-card:hover {
+      transform: translateY(-5px);
+      border-color: rgb(98 227 212 / 50%);
+      box-shadow: 0 24px 44px rgb(0 0 0 / 32%), 0 0 22px rgb(61 198 206 / 10%);
+    }
+
+    .meme-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #102d40;
+      transition: transform 500ms cubic-bezier(0.2, 0.75, 0.25, 1), filter 500ms ease;
+    }
+
+    .meme-card:hover img {
+      transform: scale(1.055);
+      filter: saturate(1.15);
+    }
+
+    .meme-meta {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      align-items: center;
+      gap: 2px 10px;
+      min-height: 66px;
+      padding: 10px 12px;
+      border-top: 1px solid rgb(172 227 243 / 16%);
+      background: rgb(9 28 42 / 68%);
+      backdrop-filter: blur(18px) saturate(150%);
+    }
+
+    .meme-rank {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      grid-row: span 2;
+      place-items: center;
+      border: 1px solid rgb(169 235 244 / 24%);
+      border-radius: 50%;
+      color: #83f0e1;
+      background: rgb(48 127 148 / 30%);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .meme-name {
+      overflow: hidden;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .meme-label {
+      color: #8db3c2;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .type-meme {
+      display: flex;
+      min-height: 260px;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    .type-meme.aqua {
+      color: #123c49;
+      background: linear-gradient(145deg, #9fe8e0, #b4dff2);
+    }
+
+    .type-meme.ice {
+      color: #183c58;
+      background: linear-gradient(145deg, #c5d6ff, #a8dcef);
+    }
+
+    .prompt-backdrop,
+    .scare {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .prompt-backdrop {
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgb(2 9 17 / 62%);
+      backdrop-filter: blur(10px) saturate(130%);
+      animation: backdrop-enter 360ms ease-out both;
+    }
+
+    .prompt {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      width: min(100%, 440px);
+      padding: 36px;
+      border: 1px solid rgb(161 225 243 / 30%);
+      border-radius: 8px;
+      background: rgb(17 39 56 / 70%);
+      box-shadow: 0 28px 90px rgb(0 0 0 / 54%), inset 0 1px 0 rgb(221 248 255 / 12%);
+      backdrop-filter: blur(28px) saturate(165%);
+      text-align: center;
+      animation: glass-enter 520ms cubic-bezier(0.18, 0.8, 0.25, 1) both;
+    }
+
+    .prompt::before {
+      position: absolute;
+      z-index: 0;
+      inset: -60% -90%;
+      background: linear-gradient(110deg, transparent 42%, rgb(225 250 255 / 11%) 50%, transparent 58%);
+      content: "";
+      pointer-events: none;
+      animation: glass-sweep 8s ease-in-out infinite;
+    }
+
+    .prompt > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .prompt-mark {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      color: #efffff;
+      background: linear-gradient(145deg, #20b9ad, #327fc2);
+      box-shadow: 0 0 28px rgb(62 219 210 / 22%);
+      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-size: 25px;
+      animation: mark-pulse 3.5s ease-in-out infinite;
+    }
+
+    .prompt-warning {
+      margin-bottom: 9px !important;
+      color: #72e8dc !important;
+      font-size: 11px !important;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      animation: note-enter 650ms 170ms ease-out backwards;
+    }
+
+    .prompt h2 {
+      margin: 0 0 9px;
+      font-family: "Bowlby One SC", Impact, sans-serif;
+      font-size: 29px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .prompt p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .prompt-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 26px;
+      animation: actions-enter 650ms 300ms ease-out backwards;
+    }
+
+    .choice {
+      min-height: 48px;
+      flex: 1;
+      border: 1px solid rgb(160 226 243 / 24%);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform 140ms ease, filter 140ms ease;
+    }
+
+    .choice:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.04);
+    }
+
+    .choice-yes {
+      position: relative;
+      overflow: hidden;
+      color: #f4ffff;
+      background: linear-gradient(120deg, #118f8b, #246da8);
+      box-shadow: 0 8px 22px rgb(21 159 174 / 26%);
+      animation: yes-glow 4s ease-in-out infinite;
+    }
+
+    .choice-yes::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 20%) 50%, transparent 70%);
+      content: "";
+      pointer-events: none;
+      animation: glass-sweep 6s ease-in-out infinite;
+    }
+
+    .choice-no {
+      color: var(--ink);
+      background: rgb(121 166 190 / 13%);
+      backdrop-filter: blur(10px);
+    }
+
+    .reopen-button {
+      margin-top: 22px;
+      padding: 10px 14px;
+      border: 1px solid rgb(154 218 235 / 24%);
+      border-radius: 4px;
+      color: var(--ink);
+      background: rgb(25 52 69 / 54%);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 22%);
+      backdrop-filter: blur(16px);
+      transition: transform 180ms ease, background 180ms ease;
+      animation: actions-enter 700ms 900ms backwards;
+    }
+
+    .reopen-button:hover {
+      transform: translateY(-2px);
+      background: rgb(34 74 95 / 72%);
+    }
+
+    .scare {
+      z-index: 1;
+      background: #000;
+    }
+
+    .scare video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .scare[hidden],
+    .prompt-backdrop[hidden] {
+      display: none;
+    }
+
+    @keyframes bar-enter {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes background-drift {
+      to { background-position: 0 0, 44px 44px, -44px 0; }
+    }
+
+    @keyframes logo-glow {
+      0%, 100% { text-shadow: 0 0 12px rgb(98 227 212 / 16%); }
+      50% { text-shadow: 0 0 22px rgb(98 227 212 / 52%); }
+    }
+
+    @keyframes note-enter {
+      from { opacity: 0; transform: translateY(9px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heading-enter {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); filter: blur(8px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes intro-enter {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes tile-enter {
+      from { opacity: 0; transform: translateY(22px) scale(0.97); filter: blur(5px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes backdrop-enter {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glass-enter {
+      from { opacity: 0; transform: translateY(14px) scale(0.96); filter: blur(8px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes glass-sweep {
+      0%, 22% { transform: translateX(-48%); }
+      72%, 100% { transform: translateX(48%); }
+    }
+
+    @keyframes mark-pulse {
+      0%, 100% { box-shadow: 0 0 18px rgb(62 219 210 / 18%); transform: scale(1); }
+      50% { box-shadow: 0 0 30px rgb(62 219 210 / 42%); transform: scale(1.045); }
+    }
+
+    @keyframes actions-enter {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes yes-glow {
+      0%, 100% { box-shadow: 0 8px 22px rgb(21 159 174 / 20%); }
+      50% { box-shadow: 0 8px 30px rgb(21 159 174 / 48%); }
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        padding: 17px 20px;
+      }
+
+      .top-note {
+        max-width: 130px;
+        text-align: right;
+      }
+
+      .page {
+        padding: 40px 20px 52px;
+      }
+
+      .intro {
+        align-items: start;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .meme-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .meme-meta {
+        grid-template-columns: 25px minmax(0, 1fr);
+        gap: 2px 7px;
+        padding: 9px;
+      }
+
+      .meme-rank {
+        width: 25px;
+        height: 25px;
+      }
+
+      .prompt {
+        padding: 30px 22px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .meme-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="topbar">
+      <a class="brand" href="#top">MEME<span>BREAK</span></a>
+      <span class="top-note">Popular templates, freshly picked</span>
+    </header>
+
+    <section class="page" id="top">
+      <div class="intro">
+        <div>
+          <p class="eyebrow">Trending templates</p>
+          <h1>MEME BREAK</h1>
+        </div>
+        <p class="intro-copy">Twelve internet favorites, refreshed from the popular template list.</p>
+      </div>
+
+      <div class="meme-grid" id="meme-grid" aria-label="Trending meme templates" aria-busy="true"></div>
+
+      <button class="reopen-button" id="reopen-button" type="button">Ask me again</button>
+    </section>
+
+    <section class="prompt-backdrop" id="prompt-backdrop" aria-label="Meme prompt">
+      <div class="prompt" role="dialog" aria-modal="true" aria-labelledby="prompt-title" aria-describedby="prompt-description">
+        <div class="prompt-mark" aria-hidden="true">!</div>
+        <p class="prompt-warning">Warning: may cause fatal giggles</p>
+        <h2 id="prompt-title">Do you want to see memes?</h2>
+        <p id="prompt-description">Proceed at your own risk. Laughter levels may get out of hand.</p>
+        <div class="prompt-actions">
+          <button class="choice choice-yes" id="yes-button" type="button">Yes, let's go</button>
+          <button class="choice choice-no" id="no-button" type="button">No, thanks</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scare" id="scare" aria-label="Video" hidden>
+      <video id="video" src="https://coolcutecat.neocities.org/video.mp4" loop playsinline preload="auto"></video>
+      <audio id="scare-audio" src="https://coolcutecat.neocities.org/video.mp4" loop preload="auto"></audio>
+    </section>
+  </main>
+
+  <script>
+    const promptBackdrop = document.getElementById("prompt-backdrop");
+    const yesButton = document.getElementById("yes-button");
+    const noButton = document.getElementById("no-button");
+    const reopenButton = document.getElementById("reopen-button");
+    const scare = document.getElementById("scare");
+    const video = document.getElementById("video");
+    const scareAudio = document.getElementById("scare-audio");
+    const memeGrid = document.getElementById("meme-grid");
+    const fallbackMemes = [
+      { name: "Drake Hotline Bling", url: "https://i.imgflip.com/30b1gx.jpg" },
+      { name: "Two Buttons", url: "https://i.imgflip.com/1g8my4.jpg" },
+      { name: "Distracted Boyfriend", url: "https://i.imgflip.com/1ur9b0.jpg" },
+      { name: "Bernie I Am Once Again Asking", url: "https://i.imgflip.com/3oevdk.jpg" },
+      { name: "UNO Draw 25 Cards", url: "https://i.imgflip.com/3lmzyx.jpg" },
+      { name: "Always Has Been", url: "https://i.imgflip.com/46e43q.png" },
+      { name: "Left Exit 12 Off Ramp", url: "https://i.imgflip.com/22bdq6.jpg" },
+      { name: "Anakin Padme 4 Panel", url: "https://i.imgflip.com/5c7lwq.png" },
+      { name: "Epic Handshake", url: "https://i.imgflip.com/28j0te.jpg" },
+      { name: "Gru's Plan", url: "https://i.imgflip.com/26jxvz.jpg" },
+      { name: "Disaster Girl", url: "https://i.imgflip.com/23ls.jpg" },
+      { name: "Running Away Balloon", url: "https://i.imgflip.com/261o3j.jpg" }
+    ];
+
+    function renderMemes(memes) {
+      const cards = memes.slice(0, 12).map((meme, index) => {
+        const card = document.createElement("article");
+        const image = document.createElement("img");
+        const meta = document.createElement("div");
+        const rank = document.createElement("span");
+        const name = document.createElement("span");
+        const label = document.createElement("span");
+
+        card.className = "meme-card";
+        card.style.animationDelay = `${index * 55}ms`;
+        image.src = meme.url;
+        image.alt = `${meme.name} meme template`;
+        image.loading = index < 4 ? "eager" : "lazy";
+        image.decoding = "async";
+        meta.className = "meme-meta";
+        rank.className = "meme-rank";
+        rank.textContent = String(index + 1).padStart(2, "0");
+        name.className = "meme-name";
+        name.textContent = meme.name;
+        label.className = "meme-label";
+        label.textContent = "Popular template";
+
+        meta.append(rank, name, label);
+        card.append(image, meta);
+        return card;
+      });
+
+      memeGrid.replaceChildren(...cards);
+      memeGrid.setAttribute("aria-busy", "false");
+    }
+
+    renderMemes(fallbackMemes);
+
+    fetch("https://api.imgflip.com/get_memes")
+      .then((response) => {
+        if (!response.ok) throw new Error("Meme feed unavailable");
+        return response.json();
+      })
+      .then((result) => {
+        if (result.success && Array.isArray(result.data?.memes)) {
+          renderMemes(result.data.memes);
+        }
+      })
+      .catch(() => {});
+
+    async function startScare() {
+      promptBackdrop.hidden = true;
+      scare.hidden = false;
+      video.muted = true;
+      video.volume = 1;
+      video.currentTime = 0;
+      scareAudio.muted = false;
+      scareAudio.volume = 1;
+      scareAudio.currentTime = 0;
+
+      try {
+        const [videoResult, audioResult] = await Promise.allSettled([video.play(), scareAudio.play()]);
+        if (videoResult.status === "rejected") throw videoResult.reason;
+        if (audioResult.status === "rejected") video.muted = false;
+        if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+          await document.documentElement.requestFullscreen();
+        }
+      } catch {
+        scare.hidden = false;
+      }
+    }
+
+    async function stopScare() {
+      video.pause();
+      video.currentTime = 0;
+      scareAudio.pause();
+      scareAudio.currentTime = 0;
+      scare.hidden = true;
+
+      if (document.fullscreenElement && document.exitFullscreen) {
+        await document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    yesButton.addEventListener("click", startScare);
+    noButton.addEventListener("click", startScare);
+    reopenButton.addEventListener("click", () => {
+      promptBackdrop.hidden = false;
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !scare.hidden) {
+        stopScare();
+      }
+    });
+  </script>
+</body>
+</html>
