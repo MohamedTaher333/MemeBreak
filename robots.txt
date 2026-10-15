@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mohamedtaher333.github.io/Jeff-the-killer-website/sitemap.xml
